@@ -21,6 +21,7 @@ body { background: #f6f0df; color: var(--paper); }
 .brand-star { color: #b3833d; text-shadow: 0 0 12px rgba(179, 131, 61, .38); }
 .menu-screen, .exit-screen { background: #f6f0df; }
 .menu-visual {
+  top: 0;
   background:
     radial-gradient(ellipse at 63% 40%, rgba(201, 188, 219, .74), transparent 43%),
     radial-gradient(ellipse at 77% 76%, rgba(167, 197, 184, .55), transparent 38%),
