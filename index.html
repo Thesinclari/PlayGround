@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07080f" />
+  <meta name="description" content="Goddess and the Conquest — a celestial conquest strategy game. Reclaim the realm of Aethermoor from the Hollow King." />
+  <title>Goddess and the Conquest</title>
+  <link rel="preload" href="assets/fonts/cinzel.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/cormorant.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%23090c16'/%3E%3Cpath d='M32 8l4.6 15.4L52 28l-15.4 4.6L32 48l-4.6-15.4L12 28l15.4-4.6z' fill='%23e8c77a'/%3E%3Ccircle cx='32' cy='28' r='2.4' fill='%23090c16'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ══════════════ ambient backdrop ══════════════ -->
+  <div class="world-bg" aria-hidden="true">
+    <div class="world-bg__blur"></div>
+    <div class="world-bg__stars"></div>
+    <div class="world-bg__grain"></div>
+    <div class="world-bg__scrim"></div>
+  </div>
+
+  <svg class="svg-sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-crest" viewBox="0 0 32 32">
+      <path d="M16 2.5 19 12l9.5 4L19 20l-3 9.5L13 20l-9.5-4L13 12Z" fill="none" stroke="currentColor" stroke-width="1.3"/>
+      <circle cx="16" cy="16" r="3.4" fill="currentColor"/>
+      <path d="M16 1v5M16 26v5M1 16h5M26 16h5" stroke="currentColor" stroke-width="1" opacity=".7"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24">
+      <rect x="4.5" y="10.5" width="15" height="10.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="12" cy="15.5" r="1.5" fill="currentColor"/>
+      <path d="M12 17v2.3" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+    <symbol id="i-faith" viewBox="0 0 24 24">
+      <path d="M12 2.5 14.2 9.8 21.5 12l-7.3 2.2L12 21.5l-2.2-7.3L2.5 12l7.3-2.2Z" fill="currentColor"/>
+      <circle cx="12" cy="12" r="1.8" fill="#0a0d17"/>
+    </symbol>
+    <symbol id="i-host" viewBox="0 0 24 24">
+      <path d="M6 21.5V3.8l10 2.4-10 2.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M6 3v18.5M16 6.2l4 1.6-4 1.7" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M9.5 12.5h7M9.5 16h4.5" stroke="currentColor" stroke-width="1.2" opacity=".7"/>
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24">
+      <path d="M12 2.5 20 5v6.5c0 5-3.3 8.3-8 10-4.7-1.7-8-5-8-10V5Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M12 7v8M8.7 10.3h6.6" stroke="currentColor" stroke-width="1.4"/>
+    </symbol>
+    <symbol id="i-turn" viewBox="0 0 24 24">
+      <path d="M20 12a8 8 0 1 1-2.6-5.9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M20.5 3v5.2h-5.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="12" cy="12" r="2" fill="currentColor"/>
+    </symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24">
+      <path d="M4 9.5h3L12 5.5v13L7 14.5H4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-muted" viewBox="0 0 24 24">
+      <path d="M4 9.5h3L12 5.5v13L7 14.5H4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="m16 9.5 5 5m0-5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path d="M4 7h16M4 12h11M4 17h16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 24 24">
+      <path d="m5.5 5.5 13 13m0-13-13 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-save" viewBox="0 0 24 24">
+      <path d="M4 4h13l3 3v13H4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M8 4v5h7V4M8 20v-6h8v6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-scroll" viewBox="0 0 24 24">
+      <path d="M7 3h11a2 2 0 0 1 2 2v2h-4M7 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7" fill="none" stroke="currentColor" stroke-width="1.4"/>
+      <path d="M9 9h6M9 12.5h7M9 16h4" stroke="currentColor" stroke-width="1.2" opacity=".8"/>
+    </symbol>
+    <symbol id="i-smite" viewBox="0 0 32 32">
+      <path d="M18.5 3 6.5 18h7l-2 11L24 13h-7.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M4 7l2.5 1M27 22l2.5 1M24 4l-1 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+    </symbol>
+    <symbol id="i-bless" viewBox="0 0 32 32">
+      <circle cx="16" cy="16" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <path d="M16 2v5M16 25v5M2 16h5M25 16h5M6 6l3.5 3.5M22.5 22.5 26 26M26 6l-3.5 3.5M9.5 22.5 6 26" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-mend" viewBox="0 0 32 32">
+      <path d="M16 27S5 20.5 5 12.5A5.5 5.5 0 0 1 16 10a5.5 5.5 0 0 1 11 2.5C27 20.5 16 27 16 27Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16 14v8M12 18h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-convert" viewBox="0 0 32 32">
+      <path d="M16 4c3.2 4.2 6.5 7.4 6.5 11.4a6.5 6.5 0 0 1-13 0C9.5 11.4 12.8 8.2 16 4Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M12.5 16.8a3.7 3.7 0 0 0 3.5 3.5M8 25.5h16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24">
+      <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24">
+      <path d="m3 7 4.5 4L12 4l4.5 7L21 7l-1.5 11h-15Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M5.5 21h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <!-- ══════════════ MAIN MENU ══════════════ -->
+  <section class="screen screen--menu is-active" id="screen-menu" aria-label="Main menu">
+    <div class="hero" aria-hidden="true">
+      <div class="hero__halo"></div>
+      <div class="hero__figure"></div>
+      <div class="hero__fade"></div>
+      <div class="hero__embers" id="menu-embers"></div>
+    </div>
+
+    <div class="menu">
+      <div class="menu__top">
+        <div class="eyebrow"><span class="eyebrow__line"></span><span>The Celestial Chronicle</span><span class="eyebrow__line"></span></div>
+        <h1 class="game-title" aria-label="Goddess and the Conquest">
+          <span class="game-title__main">Goddess</span>
+          <span class="game-title__and">and the</span>
+          <span class="game-title__main game-title__main--last">Conquest</span>
+        </h1>
+        <p class="tagline">The stars have gone quiet. The Hollow King's shadow spills across Aethermoor — and the Young King of Imperial has taken up the last light.</p>
+      </div>
+
+      <nav class="menu__nav" aria-label="Main actions">
+        <button class="menu-btn menu-btn--primary" data-menu="new" id="btn-new">
+          <span class="menu-btn__mark" aria-hidden="true">✦</span>
+          <span class="menu-btn__text"><span class="menu-btn__label">New Game</span><span class="menu-btn__sub">Begin a new conquest</span></span>
+          <svg class="menu-btn__chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button class="menu-btn" data-menu="load" id="btn-load">
+          <span class="menu-btn__mark" aria-hidden="true">✦</span>
+          <span class="menu-btn__text"><span class="menu-btn__label">Load Game</span><span class="menu-btn__sub">Return to a sealed chronicle</span></span>
+          <svg class="menu-btn__chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button class="menu-btn" data-menu="options" id="btn-options">
+          <span class="menu-btn__mark" aria-hidden="true">✦</span>
+          <span class="menu-btn__text"><span class="menu-btn__label">Options</span><span class="menu-btn__sub">Sound, sight &amp; ceremony</span></span>
+          <svg class="menu-btn__chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button class="menu-btn menu-btn--locked" data-menu="create" id="btn-create" aria-disabled="true" aria-describedby="lock-note">
+          <span class="menu-btn__mark menu-btn__mark--lock" aria-hidden="true">
+            <svg><use href="#i-lock"/></svg>
+          </span>
+          <span class="menu-btn__text"><span class="menu-btn__label">Created Character <span class="badge-lock">Locked</span></span><span class="menu-btn__sub" id="lock-note">The mortal forge sleeps until the realm is freed</span></span>
+          <svg class="menu-btn__chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+        <button class="menu-btn menu-btn--exit" data-menu="exit" id="btn-exit">
+          <span class="menu-btn__mark" aria-hidden="true">✦</span>
+          <span class="menu-btn__text"><span class="menu-btn__label">Exit</span><span class="menu-btn__sub">Close the gates of Aethermoor</span></span>
+          <svg class="menu-btn__chev" aria-hidden="true"><use href="#i-chevron"/></svg>
+        </button>
+      </nav>
+
+      <div class="menu__foot">
+        <span class="menu__chapter">Chapter I · The Fallen Realm</span>
+        <span class="menu__sigil" aria-hidden="true">✦</span>
+        <span class="menu__version">v1.0</span>
+      </div>
+    </div>
+
+    <aside class="menu__aside" aria-hidden="true">
+      <span>Lumen · Aethermoor</span>
+      <span class="menu__aside-rule"></span>
+      <span>Under a starless sky</span>
+    </aside>
+    <div class="menu__gesture" aria-hidden="true">
+      <span class="menu__gesture-line"></span>
+      <span>Select an oath</span>
+    </div>
+  </section>
+
+  <!-- ══════════════ SCENARIO SELECT ══════════════ -->
+  <section class="screen screen--scenario" id="screen-scenario" aria-label="Scenario selection" hidden>
+    <div class="scenario-shell">
+      <header class="scenario-top">
+        <div class="scenario-heading">
+          <div class="eyebrow eyebrow--small"><span class="eyebrow__line"></span><span>The Celestial Chronicle</span></div>
+          <h2>Scenario</h2>
+        </div>
+        <div class="scenario-tabs" role="tablist" aria-label="Scenario view">
+          <button class="scenario-tab is-active" data-scenario-tab="scenario" role="tab" aria-selected="true" aria-controls="scenario-panel-scenario">Scenario</button>
+          <button class="scenario-tab" data-scenario-tab="preset" role="tab" aria-selected="false" aria-controls="scenario-panel-preset">Preset</button>
+        </div>
+        <button class="scenario-back" data-scenario="back">
+          <svg aria-hidden="true"><use href="#i-chevron"/></svg>
+          <span>Main Menu</span>
+        </button>
+      </header>
+
+      <div class="scenario-body">
+        <aside class="scenario-list" aria-label="Scenarios">
+          <div class="scenario-list__head"><span>Campaigns</span><span>01 / 03</span></div>
+          <button class="scenario-item is-selected" data-scenario-id="beginning" aria-pressed="true">
+            <span class="scenario-item__mark" aria-hidden="true">✦</span>
+            <span class="scenario-item__body">
+              <span class="scenario-item__name">The Beginning</span>
+              <span class="scenario-item__sub">An age of new beginnings</span>
+            </span>
+          </button>
+          <button class="scenario-item is-locked" data-scenario-id="sacred" aria-disabled="true">
+            <span class="scenario-item__mark" aria-hidden="true">✦</span>
+            <span class="scenario-item__body">
+              <span class="scenario-item__name">The Sacred Lands</span>
+              <span class="scenario-item__sub">Where ancient creatures dwell</span>
+            </span>
+            <svg class="scenario-item__lock" aria-hidden="true"><use href="#i-lock"/></svg>
+          </button>
+          <button class="scenario-item is-locked" data-scenario-id="ash" aria-disabled="true">
+            <span class="scenario-item__mark" aria-hidden="true">✦</span>
+            <span class="scenario-item__body">
+              <span class="scenario-item__name">A Crown of Ash</span>
+              <span class="scenario-item__sub">The Hollow King's war</span>
+            </span>
+            <svg class="scenario-item__lock" aria-hidden="true"><use href="#i-lock"/></svg>
+          </button>
+          <p class="scenario-list__foot">Only the first chapter is unsealed in this edition. The others wait beyond the Sacred Lands.</p>
+        </aside>
+
+        <section class="scenario-detail">
+          <article class="scenario-panel" id="scenario-panel-scenario">
+            <div class="scenario-panel__header">
+              <div class="eyebrow"><span class="eyebrow__line"></span><span>Chapter I · The First Age</span></div>
+              <h3 class="scenario-title">The Beginning</h3>
+              <p class="scenario-lead">An age of new beginnings has dawned upon the world.</p>
+              <div class="scenario-tags">
+                <span class="scenario-tag">World · Aethermoor</span>
+                <span class="scenario-tag">Start · Sanctum of Dawn</span>
+                <span class="scenario-tag scenario-tag--fate" id="scenario-difficulty-tag">Sovereign · Normal</span>
+              </div>
+            </div>
+
+            <div class="scenario-bio" tabindex="0" aria-label="Scenario biography">
+              <p>Long after the creation of the heavens, earth, and all living things by Elarris, The Goddess, civilizations have flourished across the lands. What once began as small settlements has gradually developed into villages, castles, and powerful kingdoms.</p>
+              <p>Under the watchful presence of Elarris, the world enjoyed an age of growth and prosperity. Yet as civilizations expanded, so did their ambitions. Different rulers began establishing their own domains, each seeking to secure their people's future and strengthen their influence.</p>
+              <p>At the heart of the world lies the Divine Shrine, surrounded by the mysterious Sacred Lands. Few dare to approach these sacred territories, where ancient creatures continue to dwell.</p>
+              <p>Now, a new era is beginning. Kingdoms stand ready to shape the fate of the world, and the ambitions of their rulers will determine what comes next.</p>
+              <p class="scenario-question">Will one kingdom rise above all others and unite the world under a single banner?</p>
+              <p class="scenario-question">Or will the world remain divided among competing powers?</p>
+              <p class="scenario-close-line">The story of a new age begins here.</p>
+            </div>
+
+            <div class="scenario-figures">
+              <div class="scenario-portrait">
+                <div class="scenario-portrait__img" id="scenario-portrait-img" aria-hidden="true"></div>
+                <div class="scenario-portrait__text"><span id="scenario-hero-name">Lux Osborn</span><em id="scenario-hero-title">The Young King of Imperial</em></div>
+              </div>
+              <div class="scenario-minimap" aria-hidden="true">
+                <svg viewBox="0 0 190 118">
+                  <path d="M18 76 C10 62 20 47 39 42 C53 38 56 27 73 24 C91 21 96 11 114 14 C131 17 135 24 150 24 C165 24 176 33 178 47 C181 60 173 71 176 84 C178 97 166 104 152 103 C139 102 128 111 113 108 C99 106 93 111 79 109 C65 107 58 100 46 98 C32 96 24 88 18 76 Z" fill="rgba(232,199,122,.04)" stroke="rgba(232,199,122,.28)" stroke-width="1"/>
+                  <g stroke="rgba(232,199,122,.2)" stroke-width=".7" fill="none">
+                    <path d="M38 74 Q 70 62 96 70 T 160 58"/>
+                    <path d="M60 44 Q 80 58 78 86"/>
+                    <path d="M110 30 Q 112 54 128 68"/>
+                    <path d="M128 68 Q 148 72 160 58"/>
+                    <path d="M96 70 Q 110 84 128 68"/>
+                  </g>
+                  <g fill="#f2d48c"><circle cx="37" cy="75" r="3"/><circle cx="80" cy="86" r="2.2"/></g>
+                  <g fill="#c47be0"><circle cx="160" cy="58" r="3"/><circle cx="128" cy="68" r="2.2"/></g>
+                  <g fill="rgba(220,220,235,.55)"><circle cx="96" cy="70" r="2"/><circle cx="60" cy="44" r="2"/><circle cx="110" cy="30" r="2"/><circle cx="78" cy="58" r="1.6"/></g>
+                  <text x="95" y="112" text-anchor="middle" font-family="Cinzel, serif" font-size="6" letter-spacing="2.4" fill="rgba(232,199,122,.4)">AETHERMOOR</text>
+                </svg>
+              </div>
+              <div class="scenario-oath">
+                <span class="scenario-oath__kicker">Your oath</span>
+                <p>Hold the Sanctum of Dawn. Take the Shadow Citadel. Unite Aethermoor beneath the Imperial banner.</p>
+                <span class="scenario-oath__fate" id="scenario-fate">Sovereign · Normal</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="scenario-panel" id="scenario-panel-preset" hidden>
+            <div class="scenario-panel__header">
+              <div class="eyebrow"><span class="eyebrow__line"></span><span>The Shape of Fate</span></div>
+              <h3 class="scenario-title">Preset</h3>
+              <p class="scenario-lead">Choose how heavy the Hollow King's shadow will fall.</p>
+            </div>
+            <div class="preset-grid" id="preset-grid" role="radiogroup" aria-label="Difficulty preset"></div>
+            <p class="preset-note">Presets set the difficulty for a new conquest. The choice is remembered and can be changed later in Options.</p>
+          </article>
+        </section>
+      </div>
+
+      <footer class="scenario-bottom">
+        <span class="scenario-hint" id="scenario-hint"><span class="scenario-hint__mark" aria-hidden="true">✦</span> Select the scenario you wish to play.</span>
+        <div class="scenario-actions">
+          <button class="link scenario-prologue" data-scenario="prologue">Read the prologue</button>
+          <button class="btn btn--gold" data-scenario="begin">Begin the Conquest <span aria-hidden="true">✦</span></button>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ══════════════ CHARACTER SELECT ══════════════ -->
+  <section class="screen screen--character" id="screen-character" aria-label="Character selection" hidden>
+    <div class="character-shell">
+      <header class="scenario-top character-top">
+        <div class="scenario-heading">
+          <div class="eyebrow eyebrow--small"><span class="eyebrow__line"></span><span>The Celestial Chronicle</span></div>
+          <h2>Character</h2>
+        </div>
+        <div class="character-steps" aria-hidden="true">
+          <span class="character-step is-done">I · Scenario</span>
+          <i></i>
+          <span class="character-step is-current">II · Sovereign</span>
+          <i></i>
+          <span class="character-step">III · Conquest</span>
+        </div>
+        <button class="scenario-back" data-character="back">
+          <svg aria-hidden="true"><use href="#i-chevron"/></svg>
+          <span>Scenario</span>
+        </button>
+      </header>
+
+      <div class="character-body">
+        <aside class="character-list" aria-label="Sovereigns">
+          <div class="scenario-list__head"><span>Roster</span><span>01 / 01</span></div>
+          <button class="character-item is-selected" data-character-id="lux" aria-pressed="true">
+            <span class="character-item__portrait"><img src="assets/lux-osborn.jpg" alt="" /></span>
+            <span class="character-item__body">
+              <span class="character-item__name">Lux Osborn</span>
+              <span class="character-item__sub">The Young King of Imperial</span>
+              <span class="character-item__meta">Imperial · Neutral</span>
+            </span>
+            <span class="character-item__mark" aria-hidden="true">✦</span>
+          </button>
+          <div class="character-list__seal" aria-hidden="true">
+            <span>✦</span>
+            <p>Only one sovereign has answered the call. The rest of the bloodline remains sealed.</p>
+          </div>
+          <p class="scenario-list__foot">A king is not born to privilege, but to responsibility. Choose the hand that will hold the realm.</p>
+        </aside>
+
+        <section class="character-detail">
+          <article class="character-panel">
+            <div class="character-hero">
+              <figure class="character-portrait">
+                <img id="character-portrait-img" src="assets/lux-osborn.jpg" alt="Portrait of Lux Osborn" />
+                <figcaption>The Young King of Imperial</figcaption>
+              </figure>
+              <div class="character-identity">
+                <div class="eyebrow"><span class="eyebrow__line"></span><span>Sovereign of the Imperial Kingdom</span></div>
+                <h3 class="character-name" id="character-name">Lux Osborn</h3>
+                <p class="character-title" id="character-title">The Young King of Imperial</p>
+                <div class="character-tags">
+                  <span class="character-tag">Kingdom · <b id="character-kingdom">Imperial</b></span>
+                  <span class="character-tag">Affinity · <b id="character-affinity">Neutral</b></span>
+                </div>
+                <div class="character-skill">
+                  <span class="character-skill__kicker">Signature Skill</span>
+                  <div class="character-skill__head">
+                    <span class="character-skill__icon" aria-hidden="true">✦</span>
+                    <h4 id="character-skill-name">Insight</h4>
+                    <span class="character-skill__tag">Passive</span>
+                  </div>
+                  <p id="character-skill-desc">When Lux's Intelligence is higher than the enemy commander's, Insight cancels the enemy's Tactics or Magic.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="character-columns">
+              <div class="character-stats-block">
+                <div class="character-section-label">Attributes</div>
+                <div class="character-stats" id="character-stats"></div>
+              </div>
+              <div class="character-lore-block">
+                <div class="character-section-label">Chronicle</div>
+                <div class="character-lore" id="character-lore" tabindex="0" aria-label="Character lore"></div>
+              </div>
+            </div>
+
+            <div class="character-profile">
+              <div><span>Personality</span><b id="character-personality">Strict · Disciplined · Competitive</b></div>
+              <div><span>Succession</span><b id="character-succession">Inherited from his father</b></div>
+              <div><span>Kingdom</span><b id="character-kingdom-2">Imperial</b></div>
+              <div><span>Affinity</span><b id="character-affinity-2">Neutral</b></div>
+            </div>
+          </article>
+        </section>
+      </div>
+
+      <footer class="scenario-bottom">
+        <span class="scenario-hint" id="character-hint">
+          <span class="scenario-hint__mark" aria-hidden="true">✦</span> Lux Osborn will lead the Imperial host into Aethermoor.
+        </span>
+        <div class="scenario-actions">
+          <button class="link scenario-prologue" data-character="prologue">Read the prologue</button>
+          <button class="btn btn--gold" data-character="begin">Take up the Crown <span aria-hidden="true">✦</span></button>
+        </div>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ══════════════ PROLOGUE ══════════════ -->
+  <section class="screen screen--intro" id="screen-intro" aria-label="Prologue" hidden>
+    <div class="intro__art" aria-hidden="true"></div>
+    <div class="intro__veil" aria-hidden="true"></div>
+    <div class="intro__panel">
+      <div class="eyebrow"><span class="eyebrow__line"></span><span>Prologue · The Last Dawn</span><span class="eyebrow__line"></span></div>
+      <h2 class="intro__title">Before the stars<br /><em>went out</em></h2>
+      <div class="intro__prose">
+        <p>Long ages ago, Elarris, the Goddess of Dawn, sealed the Hollow King beneath the Shadow Citadel. Her light became the sun. Her vow became the border between the living world and the dark.</p>
+        <p>Now the seal is broken. The sun has dimmed to a dying ember, and the citadel's legions march under a banner of rot. You are <strong>Lux Osborn</strong>, the young king of the Imperial Kingdom — raised to prove his worth, and now called to prove it once more. One host, one sanctum, one promise stand between the realm and the dark.</p>
+        <p class="intro__oath">“Hold the light. Break the Hollow King. <em>Unite the realm.</em>”</p>
+      </div>
+      <ul class="intro__goals">
+        <li><span class="goal-mark">✦</span><span><strong>Hold the Sanctum of Dawn.</strong> If it falls, the light is lost.</span></li>
+        <li><span class="goal-mark">✦</span><span><strong>March across Aethermoor.</strong> Take the Shadow Citadel to win.</span></li>
+        <li><span class="goal-mark">✦</span><span><strong>Spend faith wisely.</strong> Muster your host, or call down divine powers.</span></li>
+      </ul>
+      <div class="intro__actions">
+        <button class="btn btn--ghost" data-intro="back">Scenarios</button>
+        <button class="btn btn--gold" data-intro="begin">Take up the mantle <span aria-hidden="true">✦</span></button>
+      </div>
+      <p class="intro__hint">Tip: press <kbd>E</kbd> to end your turn · <kbd>Esc</kbd> for the war council</p>
+    </div>
+  </section>
+
+  <!-- ══════════════ GAME ══════════════ -->
+  <section class="screen screen--game" id="screen-game" aria-label="Conquest map" hidden>
+    <header class="hud">
+      <div class="hud__brand">
+        <svg class="hud__crest" aria-hidden="true"><use href="#i-crest"/></svg>
+        <div class="hud__brand-text">
+          <span class="hud__brand-name">Goddess <em>and the</em> Conquest</span>
+          <span class="hud__brand-sub" id="hud-objective">Seize the Shadow Citadel</span>
+        </div>
+      </div>
+      <div class="hud__stats" aria-label="Realm status">
+        <div class="stat" title="Turn">
+          <svg aria-hidden="true"><use href="#i-turn"/></svg>
+          <span class="stat__value" id="stat-turn">1</span>
+          <span class="stat__label">Turn</span>
+        </div>
+        <div class="stat stat--faith" title="Faith">
+          <svg aria-hidden="true"><use href="#i-faith"/></svg>
+          <span class="stat__value" id="stat-faith">30</span>
+          <span class="stat__label">Faith</span>
+        </div>
+        <div class="stat stat--host" title="Host">
+          <svg aria-hidden="true"><use href="#i-host"/></svg>
+          <span class="stat__value" id="stat-host">8</span>
+          <span class="stat__label">Host</span>
+        </div>
+        <div class="stat" title="Provinces held">
+          <svg aria-hidden="true"><use href="#i-shield"/></svg>
+          <span class="stat__value" id="stat-provinces">2<span class="stat__of">/15</span></span>
+          <span class="stat__label">Provinces</span>
+        </div>
+      </div>
+      <div class="hud__actions">
+        <button class="icon-btn" id="btn-sound" aria-label="Mute sound" aria-pressed="false">
+          <svg aria-hidden="true"><use href="#i-sound"/></svg>
+        </button>
+        <button class="icon-btn" id="btn-pause" aria-label="Open war council">
+          <svg aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="game-main">
+      <section class="map-panel" aria-label="Map of Aethermoor">
+        <div class="map-panel__head">
+          <div>
+            <div class="eyebrow eyebrow--small"><span class="eyebrow__line"></span><span>The Realm of Aethermoor</span></div>
+            <h2 class="map-panel__title">A starless land, <em>waiting for dawn</em></h2>
+          </div>
+          <div class="legend">
+            <span class="legend__item"><i class="dot dot--player"></i>Imperial</span>
+            <span class="legend__item"><i class="dot dot--enemy"></i>Hollow</span>
+            <span class="legend__item"><i class="dot dot--neutral"></i>Free</span>
+          </div>
+        </div>
+
+        <div class="map-stage" id="map-stage">
+          <svg class="realm-map" id="realm-map" viewBox="0 0 1000 700" preserveAspectRatio="none" role="img" aria-label="Map of Aethermoor"></svg>
+          <div class="map-nodes" id="map-nodes"></div>
+          <div class="map-tokens" id="map-tokens" aria-hidden="true"></div>
+          <div class="map-glow" aria-hidden="true"></div>
+          <div class="map-banner" id="map-banner" aria-live="polite">
+            <span class="map-banner__kicker">The dawn rises</span>
+            <span class="map-banner__text">Turn 1 · Your move, Sovereign</span>
+          </div>
+          <div class="map-toast" id="map-toast" role="status" aria-live="polite"></div>
+          <div class="map-hint" id="map-hint">
+            <span class="map-hint__orb" aria-hidden="true">✦</span>
+            <span id="map-hint-text">Select a province, or march your host</span>
+          </div>
+          <div class="map-actions">
+            <button class="btn btn--gold btn--endturn" id="btn-endturn">
+              <span class="btn--endturn__text">End Turn</span>
+              <span class="btn--endturn__key" aria-hidden="true">E</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="War council">
+        <section class="panel host-panel">
+          <div class="panel__head">
+            <span class="panel__kicker">The Sovereign</span>
+            <span class="owner-badge owner-badge--player" id="host-location">Sanctum of Dawn</span>
+          </div>
+          <div class="host-row">
+            <div class="host-avatar" aria-hidden="true">
+              <span class="host-avatar__halo"></span>
+              <span class="host-avatar__face">✦</span>
+            </div>
+            <div class="host-meta">
+              <div class="host-name" id="host-name">Lux Osborn <em>The Young King</em></div>
+              <div class="host-power"><span id="host-troops">8</span> warriors <span class="dot-sep">·</span> <span class="blessing-chip" id="blessing-chip" hidden>Blessed</span></div>
+            </div>
+          </div>
+          <div class="host-actions">
+            <button class="btn btn--line" id="btn-recruit" title="Spend 10 faith to add 2 warriors">
+              <span>Muster Host</span><span class="cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>10</span>
+            </button>
+            <button class="btn btn--line btn--small" id="btn-fortify" title="Spend 8 faith to add 2 garrison to your current province">
+              <span>Fortify</span><span class="cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>8</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel province-panel" id="province-panel">
+          <div class="panel__head">
+            <span class="panel__kicker">Province</span>
+            <span class="owner-badge" id="province-owner">Imperial</span>
+          </div>
+          <h3 class="province-name" id="province-name">Sanctum of Dawn</h3>
+          <p class="province-flavor" id="province-flavor">The last altar of the old sun, still warm beneath the ash.</p>
+          <div class="province-stats">
+            <div class="pstat"><span class="pstat__label">Garrison</span><span class="pstat__value" id="province-garrison">3</span></div>
+            <div class="pstat"><span class="pstat__label">Faith / turn</span><span class="pstat__value" id="province-income">+5</span></div>
+            <div class="pstat"><span class="pstat__label">Defence</span><span class="pstat__value" id="province-defence">Altar</span></div>
+          </div>
+          <button class="btn btn--gold btn--wide province-action" id="btn-province-action" hidden>March here</button>
+          <p class="province-note" id="province-note">Your host is stationed here.</p>
+        </section>
+
+        <section class="panel powers-panel">
+          <div class="panel__head">
+            <span class="panel__kicker">Divine Powers</span>
+            <span class="panel__meta" id="powers-meta">Faith fuels miracles</span>
+          </div>
+          <div class="powers-grid">
+            <button class="power" data-power="smite" title="Cost 14 faith · Strike a province for 3 damage">
+              <svg class="power__icon" aria-hidden="true"><use href="#i-smite"/></svg>
+              <span class="power__name">Smite</span>
+              <span class="power__cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>14</span>
+            </button>
+            <button class="power" data-power="bless" title="Cost 10 faith · +35% power in your next battle">
+              <svg class="power__icon" aria-hidden="true"><use href="#i-bless"/></svg>
+              <span class="power__name">Bless</span>
+              <span class="power__cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>10</span>
+            </button>
+            <button class="power" data-power="mend" title="Cost 12 faith · Restore 4 warriors">
+              <svg class="power__icon" aria-hidden="true"><use href="#i-mend"/></svg>
+              <span class="power__name">Mend</span>
+              <span class="power__cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>12</span>
+            </button>
+            <button class="power" data-power="convert" title="Cost 24 faith · Convert a free province beside your realm">
+              <svg class="power__icon" aria-hidden="true"><use href="#i-convert"/></svg>
+              <span class="power__name">Convert</span>
+              <span class="power__cost"><svg aria-hidden="true"><use href="#i-faith"/></svg>24</span>
+            </button>
+          </div>
+          <p class="powers-cancel" id="powers-cancel" hidden>Choose a province to receive the miracle · <button class="link" id="btn-cancel-target">Cancel</button></p>
+        </section>
+
+        <section class="panel chronicle-panel">
+          <div class="panel__head">
+            <span class="panel__kicker">Chronicle</span>
+            <button class="link link--quiet" id="btn-clear-log">clear</button>
+          </div>
+          <ol class="chronicle" id="chronicle"></ol>
+        </section>
+      </aside>
+    </main>
+  </section>
+
+  <!-- ══════════════ MODALS ══════════════ -->
+  <div class="modal-layer" id="modal-options" role="dialog" aria-modal="true" aria-labelledby="options-title" hidden>
+    <div class="modal modal--options">
+      <button class="modal__close" data-close aria-label="Close options"><svg><use href="#i-close"/></svg></button>
+      <div class="eyebrow"><span class="eyebrow__line"></span><span>Ceremony</span><span class="eyebrow__line"></span></div>
+      <h2 class="modal__title" id="options-title">Options</h2>
+      <p class="modal__sub">Tune the world to your liking. Every choice is remembered.</p>
+      <div class="option-section">Sound</div>
+      <div class="option-row">
+        <div class="option-copy"><span class="option-name">Master sound</span><span class="option-desc">Let Aethermoor be heard</span></div>
+        <button class="toggle" id="opt-sound" role="switch" aria-checked="true"><span class="toggle__knob"></span></button>
+      </div>
+      <div class="option-row">
+        <div class="option-copy"><span class="option-name">Music</span><span class="option-desc">The hymn of Aethermoor</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="opt-music" min="0" max="100" value="55" aria-label="Music volume" />
+          <span class="slider-value" id="opt-music-value">55</span>
+        </div>
+      </div>
+      <div class="option-row">
+        <div class="option-copy"><span class="option-name">Effects</span><span class="option-desc">Steel, bells and starlight</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="opt-sfx" min="0" max="100" value="70" aria-label="Effects volume" />
+          <span class="slider-value" id="opt-sfx-value">70</span>
+        </div>
+      </div>
+      <div class="option-section">Difficulty</div>
+      <div class="option-row option-row--difficulty">
+        <div class="option-copy"><span class="option-name">The Hollow King</span><span class="option-desc">Strength of the coming dark</span></div>
+        <div class="segmented" id="opt-difficulty" role="radiogroup" aria-label="Difficulty">
+          <button type="button" class="seg" data-difficulty="easy" role="radio" aria-checked="false" title="Steward · a gentler dawn">Easy</button>
+          <button type="button" class="seg" data-difficulty="normal" role="radio" aria-checked="true" title="Sovereign · the intended fate">Normal</button>
+          <button type="button" class="seg" data-difficulty="hard" role="radio" aria-checked="false" title="Iron Crown · a cruel sky">Hard</button>
+        </div>
+      </div>
+      <p class="option-note" id="difficulty-note">The intended fate. A fair war between the Imperial Kingdom and the Hollow King.</p>
+      <div class="option-section">Experience</div>
+      <div class="option-row">
+        <div class="option-copy"><span class="option-name">Reduced motion</span><span class="option-desc">Calmer banners and embers</span></div>
+        <button class="toggle" id="opt-motion" role="switch" aria-checked="false"><span class="toggle__knob"></span></button>
+      </div>
+      <div class="option-row">
+        <div class="option-copy"><span class="option-name">Screen shake</span><span class="option-desc">Impact of clashing hosts</span></div>
+        <button class="toggle" id="opt-shake" role="switch" aria-checked="true"><span class="toggle__knob"></span></button>
+      </div>
+      <div class="modal__footer">
+        <button class="link" id="btn-reset-options">Restore defaults</button>
+        <button class="btn btn--gold" data-close>Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-load" role="dialog" aria-modal="true" aria-labelledby="load-title" hidden>
+    <div class="modal modal--saves">
+      <button class="modal__close" data-close aria-label="Close load menu"><svg><use href="#i-close"/></svg></button>
+      <div class="eyebrow"><span class="eyebrow__line"></span><span>The Archive</span><span class="eyebrow__line"></span></div>
+      <h2 class="modal__title" id="load-title">Load Game</h2>
+      <p class="modal__sub">Each chronicle is a thread of light. Choose one to follow again.</p>
+      <div class="save-list" id="load-list"></div>
+      <div class="modal__footer">
+        <button class="link" data-close>Return</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-save" role="dialog" aria-modal="true" aria-labelledby="save-title" hidden>
+    <div class="modal modal--saves">
+      <button class="modal__close" data-close aria-label="Close save menu"><svg><use href="#i-close"/></svg></button>
+      <div class="eyebrow"><span class="eyebrow__line"></span><span>The Archive</span><span class="eyebrow__line"></span></div>
+      <h2 class="modal__title" id="save-title">Seal a Chronicle</h2>
+      <p class="modal__sub">Preserve this moment. Your autosave follows each step of the war and is kept separately.</p>
+      <div class="save-list" id="save-list"></div>
+      <div class="modal__footer">
+        <button class="link" data-close>Return</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-pause" role="dialog" aria-modal="true" aria-labelledby="pause-title" hidden>
+    <div class="modal modal--pause">
+      <div class="eyebrow"><span class="eyebrow__line"></span><span>War Council</span><span class="eyebrow__line"></span></div>
+      <h2 class="modal__title" id="pause-title">The war waits</h2>
+      <p class="modal__sub" id="pause-sub">Turn 1 · Sanctum of Dawn</p>
+      <div class="pause-menu">
+        <button class="btn btn--gold" data-pause="resume">Resume Conquest</button>
+        <button class="btn btn--line" data-pause="save">Seal a Chronicle <span class="btn__hint">Save</span></button>
+        <button class="btn btn--line" data-pause="load">Load Game</button>
+        <button class="btn btn--line" data-pause="options">Options</button>
+        <button class="btn btn--ghost" data-pause="menu">Return to Main Menu</button>
+      </div>
+      <p class="modal__fine">Press <kbd>Esc</kbd> to return to the field.</p>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-exit" role="dialog" aria-modal="true" aria-labelledby="exit-title" hidden>
+    <div class="modal modal--exit">
+      <div class="exit-sigil" aria-hidden="true">✦</div>
+      <h2 class="modal__title" id="exit-title">Close the gates?</h2>
+      <p class="modal__sub">Aethermoor will hold its breath. Your chronicle can be resumed from the last autosave.</p>
+      <div class="modal__actions">
+        <button class="btn btn--ghost" data-close>Stay</button>
+        <button class="btn btn--gold" id="btn-confirm-exit">Exit</button>
+      </div>
+      <p class="modal__fine">The Dawn will wait for your return.</p>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-locked" role="dialog" aria-modal="true" aria-labelledby="locked-title" hidden>
+    <div class="modal modal--locked">
+      <button class="modal__close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+      <div class="lock-emblem" aria-hidden="true"><svg><use href="#i-lock"/></svg></div>
+      <h2 class="modal__title" id="locked-title">The mortal forge is sealed</h2>
+      <p class="modal__sub">Character creation is not yet awakened in this chapter. For now, Lux Osborn walks alone — but his story is only beginning.</p>
+      <div class="lock-progress">
+        <span class="lock-progress__label">Unlocks after the Shadow Citadel falls</span>
+        <span class="lock-progress__bar"><i></i></span>
+      </div>
+      <div class="modal__actions"><button class="btn btn--gold" data-close>Return</button></div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-battle" role="dialog" aria-modal="true" aria-labelledby="battle-title" hidden>
+    <div class="modal modal--battle">
+      <div class="battle-top">
+        <div class="battle-side battle-side--player">
+          <div class="battle-crest battle-crest--player">✦</div>
+          <div class="battle-side__name">Imperial Host</div>
+          <div class="battle-side__troops"><span id="battle-atk-troops">8</span> warriors</div>
+        </div>
+        <div class="battle-vs">
+          <span class="battle-vs__line"></span>
+          <span class="battle-vs__word">vs</span>
+          <span class="battle-vs__line"></span>
+        </div>
+        <div class="battle-side battle-side--enemy">
+          <div class="battle-crest battle-crest--enemy">◈</div>
+          <div class="battle-side__name" id="battle-def-name">Thornvale</div>
+          <div class="battle-side__troops"><span id="battle-def-troops">4</span> defenders</div>
+        </div>
+      </div>
+      <h2 class="modal__title battle-title" id="battle-title">Steel and starlight</h2>
+      <div class="battle-bars">
+        <div class="battle-bar">
+          <span class="battle-bar__label">Imperial <b id="battle-atk-power">8</b></span>
+          <span class="battle-bar__track"><i id="battle-atk-fill"></i></span>
+        </div>
+        <div class="battle-bar">
+          <span class="battle-bar__label">Hollow <b id="battle-def-power">5</b></span>
+          <span class="battle-bar__track"><i id="battle-def-fill" class="is-enemy"></i></span>
+        </div>
+      </div>
+      <p class="battle-outcome" id="battle-outcome">The hosts close in...</p>
+      <div class="battle-losses" id="battle-losses" hidden></div>
+      <div class="modal__actions">
+        <button class="btn btn--gold" id="btn-battle-continue">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-layer" id="modal-result" role="dialog" aria-modal="true" aria-labelledby="result-title" hidden>
+    <div class="modal modal--result" id="result-card">
+      <div class="result-constellation" aria-hidden="true"></div>
+      <div class="eyebrow"><span class="eyebrow__line"></span><span id="result-kicker">The chronicle ends</span><span class="eyebrow__line"></span></div>
+      <h2 class="modal__title result-title" id="result-title">The Citadel Falls</h2>
+      <p class="result-text" id="result-text"></p>
+      <div class="result-stats">
+        <div><span id="result-turns">0</span><small>turns</small></div>
+        <div><span id="result-provinces">0</span><small>provinces</small></div>
+        <div><span id="result-host">0</span><small>warriors</small></div>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn--line" data-result="menu">Return to Main Menu</button>
+        <button class="btn btn--gold" data-result="again" id="btn-result-again">Walk the Path Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen screen--farewell" id="screen-farewell" hidden>
+    <div class="farewell__stars" aria-hidden="true" id="farewell-stars"></div>
+    <div class="farewell__inner">
+      <span class="farewell__sigil" aria-hidden="true">✦</span>
+      <p class="farewell__kicker">The gates are sealed</p>
+      <h2 class="farewell__title">The dawn <em>will wait</em></h2>
+      <p class="farewell__text">Your battle is remembered. You may close this tab now — or return to Aethermoor while you still can.</p>
+      <button class="btn btn--ghost" id="btn-farewell-return">Return to the realm</button>
+    </div>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <div class="app-toast" id="app-toast" role="status" aria-live="polite"></div>
+  <div class="fx-flash" id="fx-flash" aria-hidden="true"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/saves.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
