@@ -4,7 +4,7 @@
 (function () {
   'use strict';
 
-  const { PROVINCES, POWERS, DIFFICULTIES, CHARACTERS } = window.GATC_DATA;
+  const { PROVINCES, POWERS, DIFFICULTIES, CHARACTERS, TERRAIN, REGIONS } = window.GATC_DATA;
   const SAVES = window.GATC_SAVES;
   const { Conquest } = window.GATC_GAME;
   const { MapView } = window.GATC_MAP;
@@ -65,6 +65,7 @@
   const provinceGarrison = $('province-garrison');
   const provinceIncome = $('province-income');
   const provinceDefence = $('province-defence');
+  const provinceTerrain = $('province-terrain');
   const provinceAction = $('btn-province-action');
   const provinceNote = $('province-note');
   const chronicle = $('chronicle');
@@ -451,6 +452,11 @@
     provinceGarrison.textContent = garrison;
     provinceIncome.textContent = '+' + p.income;
     provinceDefence.textContent = game.defenseLabel(p.id);
+    if (provinceTerrain) {
+      const terrain = TERRAIN[p.terrain];
+      provinceTerrain.textContent = terrain ? terrain.name : 'Unknown';
+      provinceTerrain.title = p.region ? p.region + ' · ' + (game.defenseLabel(p.id) || '') : '';
+    }
 
     provinceAction.hidden = true;
     provinceAction.disabled = true;
@@ -1206,7 +1212,10 @@
     const hint = targeting
       ? (targetableSet().has(id) ? 'Click to receive ' + POWERS[targeting].name : 'Out of reach for this miracle')
       : (id === game.state.playerPos ? 'Your host is here' : game.isAdjacent(id) ? (owner === 'player' ? 'Click to march here' : 'Click to inspect · attack from the panel') : 'Click to inspect');
+    const terrain = TERRAIN[p.terrain];
+    const region = REGIONS[p.region];
     tooltip.innerHTML = '<strong>' + p.name + '</strong>' +
+      '<div>' + (region ? region.name + ' · ' : '') + (terrain ? terrain.name : 'Unknown terrain') + '</div>' +
       '<div>' + OWNER_LABEL[owner] + ' · Garrison ' + game.garrison(id) + ' · +' + p.income + ' faith</div>' +
       '<div class="tooltip__hint">' + hint + '</div>';
     tooltip.hidden = false;

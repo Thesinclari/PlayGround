@@ -1735,7 +1735,6 @@ kbd {
   fill: url(#landGrad);
   stroke: rgba(232, 199, 122, 0.2);
   stroke-width: 1.2;
-  filter: url(#softShadow);
 }
 .land-coast {
   fill: none;
@@ -1744,10 +1743,116 @@ kbd {
   stroke-dasharray: 1 9;
 }
 .region-line { stroke: rgba(232, 199, 122, 0.06); stroke-width: 1; stroke-dasharray: 2 7; }
+.aurora { opacity: 0.85; pointer-events: none; }
+.sea-currents path {
+  fill: none;
+  stroke: rgba(132, 178, 214, 0.09);
+  stroke-width: 1.2;
+  stroke-dasharray: 10 16;
+  animation: currentFlow 26s linear infinite;
+}
+@keyframes currentFlow { to { stroke-dashoffset: -260; } }
+.sea-runes path { stroke: rgba(232, 199, 122, 0.13); stroke-width: 1; }
+.floating-isle { opacity: 0.92; }
+.land-shadow { fill: #02040a; opacity: 0.5; }
+.land-edge {
+  fill: none;
+  stroke: rgba(232, 199, 122, 0.35);
+  stroke-width: 1.4;
+  pointer-events: none;
+}
+.land-shape { fill: url(#landGrad); stroke: none; }
+
+/* province territories */
+.territories, .territory-tints, .terrain-decor, .region-wards, .roads { pointer-events: none; }
+.province-cell {
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+  transition: filter 0.4s, opacity 0.4s;
+}
+.province-cell.is-capital { stroke-width: 1.7; stroke-dasharray: none; }
+.province-cell.is-smited { animation: cellSmite 1.1s ease; }
+.province-cell.is-capture { animation: cellCapture 1.1s ease; }
+@keyframes cellSmite {
+  0%, 100% { filter: none; }
+  30% { filter: brightness(2) saturate(0.3); }
+}
+@keyframes cellCapture {
+  0%, 100% { filter: none; }
+  35% { filter: brightness(1.45) saturate(1.3); }
+}
+.province-tint {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 1.4;
+  transition: fill 0.45s, stroke 0.3s;
+}
+.province-tint.is-player { fill: rgba(232, 199, 122, 0.13); }
+.province-tint.is-enemy { fill: rgba(170, 88, 208, 0.15); }
+.province-tint.is-neutral { fill: rgba(150, 168, 196, 0.035); }
+.province-tint.is-adjacent { fill: rgba(232, 199, 122, 0.09); stroke: rgba(232, 199, 122, 0.3); }
+.province-tint.is-selected { stroke: rgba(242, 212, 140, 0.75); stroke-width: 1.8; }
+.province-tint.is-targetable { fill: rgba(242, 212, 140, 0.2); stroke: rgba(255, 228, 166, 0.7); stroke-dasharray: 4 3; }
+.region-ward path { fill: none; stroke-width: 1.4; stroke-dasharray: 2 3; opacity: 0.45; }
+.region-ward circle { opacity: 0.55; }
+.region-mark text {
+  font-family: var(--serif);
+  font-size: 10px;
+  letter-spacing: 4.6px;
+  text-anchor: middle;
+}
+.blight-rift {
+  stroke: rgba(196, 123, 224, 0.55);
+  stroke-width: 2.4;
+  stroke-dasharray: 2 5;
+}
+.terrain-key {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 9px 11px 10px;
+  border: 1px solid rgba(232, 199, 122, 0.16);
+  border-radius: 2px;
+  background: rgba(6, 9, 16, 0.55);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.terrain-key__title {
+  font-family: var(--serif);
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+.terrain-key__grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 3px 12px;
+}
+.terrain-key__item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--body);
+  font-size: 10.5px;
+  color: #8d91a1;
+  white-space: nowrap;
+}
+.terrain-key__item i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sw);
+  box-shadow: 0 0 7px var(--sw);
+}
 .road {
   fill: none;
-  stroke: rgba(190, 178, 150, 0.2);
-  stroke-width: 1.4;
+  stroke: rgba(198, 190, 164, 0.26);
+  stroke-width: 1.3;
   stroke-dasharray: 3 7;
   transition: stroke 0.35s, stroke-width 0.35s, opacity 0.35s;
 }
@@ -2121,9 +2226,9 @@ kbd {
 }
 .province-stats {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  padding: 8px 0;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px 10px;
+  padding: 9px 0;
   border-top: 1px solid rgba(232, 199, 122, 0.1);
   border-bottom: 1px solid rgba(232, 199, 122, 0.1);
 }
@@ -3039,6 +3144,7 @@ input[type='range']::-moz-range-thumb {
   .map-panel { padding: 12px 12px 6px; flex: none; }
   .map-panel__title { font-size: 18px; }
   .map-stage { flex: none; aspect-ratio: 10 / 7; min-height: 0; }
+  .terrain-key { display: none; }
   .side-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;

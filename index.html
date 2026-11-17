@@ -457,8 +457,8 @@
       <section class="map-panel" aria-label="Map of Aethermoor">
         <div class="map-panel__head">
           <div>
-            <div class="eyebrow eyebrow--small"><span class="eyebrow__line"></span><span>The Realm of Aethermoor</span></div>
-            <h2 class="map-panel__title">A starless land, <em>waiting for dawn</em></h2>
+            <div class="eyebrow eyebrow--small"><span class="eyebrow__line"></span><span>The Enchanted Realm of Aethermoor</span></div>
+            <h2 class="map-panel__title">A fractured realm, <em>waiting for dawn</em></h2>
           </div>
           <div class="legend">
             <span class="legend__item"><i class="dot dot--player"></i>Imperial</span>
@@ -472,6 +472,19 @@
           <div class="map-nodes" id="map-nodes"></div>
           <div class="map-tokens" id="map-tokens" aria-hidden="true"></div>
           <div class="map-glow" aria-hidden="true"></div>
+          <div class="terrain-key" aria-hidden="true">
+            <span class="terrain-key__title">Terrain</span>
+            <div class="terrain-key__grid">
+              <span class="terrain-key__item"><i style="--sw:#c9b57a"></i>Plains</span>
+              <span class="terrain-key__item"><i style="--sw:#7fb08d"></i>Forest</span>
+              <span class="terrain-key__item"><i style="--sw:#a9aec4"></i>Highlands</span>
+              <span class="terrain-key__item"><i style="--sw:#6aa8cf"></i>Water</span>
+              <span class="terrain-key__item"><i style="--sw:#78a392"></i>Mire</span>
+              <span class="terrain-key__item"><i style="--sw:#c07a68"></i>Ash</span>
+              <span class="terrain-key__item"><i style="--sw:#8fbdd6"></i>Frost</span>
+              <span class="terrain-key__item"><i style="--sw:#c47be0"></i>Blight</span>
+            </div>
+          </div>
           <div class="map-banner" id="map-banner" aria-live="polite">
             <span class="map-banner__kicker">The dawn rises</span>
             <span class="map-banner__text">Turn 1 · Your move, Sovereign</span>
@@ -527,6 +540,7 @@
             <div class="pstat"><span class="pstat__label">Garrison</span><span class="pstat__value" id="province-garrison">3</span></div>
             <div class="pstat"><span class="pstat__label">Faith / turn</span><span class="pstat__value" id="province-income">+5</span></div>
             <div class="pstat"><span class="pstat__label">Defence</span><span class="pstat__value" id="province-defence">Altar</span></div>
+            <div class="pstat"><span class="pstat__label">Terrain</span><span class="pstat__value" id="province-terrain">Sacred Ground</span></div>
           </div>
           <button class="btn btn--gold btn--wide province-action" id="btn-province-action" hidden>March here</button>
           <p class="province-note" id="province-note">Your host is stationed here.</p>
