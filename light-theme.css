@@ -1,104 +1,131 @@
-/* Light field-paper theme */
+/* Fantasy parchment theme: enchanted vellum, old gold, and spellbound mapwork. */
 :root {
-  --ink: #f4f5f0;
-  --ink2: #ffffff;
-  --paper: #28332c;
-  --muted: #687368;
-  --olive: #737b50;
-  --gold: #9c8044;
-  --rust: #a4553f;
-  --line: rgba(49, 61, 51, .17);
+  --ink: #fffaf0;
+  --ink2: #fffdf7;
+  --paper: #30253f;
+  --muted: #796d80;
+  --olive: #657f79;
+  --gold: #a97932;
+  --rust: #a45555;
+  --line: rgba(68, 51, 79, .18);
+  --serif: 'Cormorant Garamond', Georgia, serif;
 }
 
-body { background: #f7f8f4; color: var(--paper); }
-.grain { opacity: .045; }
-.topbar { color: #48564b; border-color: rgba(49, 61, 51, .16); }
-.topbar-right { color: #718071; }
-.top-divider { background: #c5ccc1; }
-.live-dot { background: #89965f; box-shadow: 0 0 10px rgba(137, 150, 95, .4); }
-.menu-screen, .exit-screen { background: #f7f8f4; }
-.menu-visual { background: radial-gradient(ellipse at 58% 45%, #e8ebe1 0%, #dce2d7 48%, #f5f6f1 100%); }
-.map-wash { background: linear-gradient(100deg, #f7f8f4 0%, rgba(247,248,244,.82) 23%, rgba(247,248,244,.18) 68%, rgba(247,248,244,.48) 100%), linear-gradient(0deg, rgba(247,248,244,.54), transparent 40%, rgba(247,248,244,.24)); }
-.hero-vignette { background: linear-gradient(90deg, #f7f8f4 0%, rgba(247,248,244,.95) 3%, rgba(247,248,244,.18) 34%, transparent 68%), linear-gradient(0deg, #f7f8f4 0%, transparent 16%, transparent 88%, #f7f8f4 100%); }
-.land-shape { fill: #b7bea7; stroke: #8e9878; }
-.river { stroke: #91a9a0; }
-.map-labels { fill: #66745f; opacity: .7; }
-.contours { stroke: #909b7c; }
-.map-coordinate { color: #64705e; }
-.eyebrow, .panel-eyebrow { color: #737b50; }
-h1 { color: #28332c; text-shadow: 0 3px 20px rgba(255,255,255,.55); }
-.amp { color: #8b7847; }
-.subtitle { color: #657166; }
-.title-rule { color: #82865c; }
-.intro { color: #59665b; }
-.menu-index { color: #748071; }
-.menu-label, .menu-button.primary .menu-label { color: #2e3931; }
-.menu-detail { color: #727d72; }
-.menu-arrow { color: #8c7947; }
-.lock-icon { color: #818a7e; }
-.menu-footer { color: #748074; }
-.menu-footer b { color: #5e6a5e; }
-.menu-button { border-color: rgba(49,61,51,.18); }
-.menu-button:hover { background: linear-gradient(90deg, rgba(115,123,80,.11), transparent); }
-.menu-button.primary:before { background: #9c8044; }
-.menu-side-note { color: #788273; }
-.dispatch-card { background: rgba(255,255,250,.91); color: #30392f; border-color: #d6d8c8; box-shadow: 0 12px 30px rgba(42,52,43,.12); }
-.dispatch-card:before { border-color: rgba(61,70,53,.17); }
-.dispatch-sign, .dispatch-bottom { color: #6d735e; }
-.game-screen { background: #f3f5ef; }
-.game-top { background: #fbfcf8; }
-.game-title { color: #2d382f; }
-.game-title small, .commander-role { color: #748074; }
-.turn-display { color: #58665a; }
-.back-button, .small-button { color: #536154; border-color: rgba(49,61,51,.2); }
-.back-button:hover, .small-button:hover { color: #29352c; border-color: var(--gold); }
-.map-panel { background: radial-gradient(ellipse at 48% 47%, #e4e9dc, #dce3d8 66%, #edf0e9); }
-.campaign-map .map-land { fill: #aab69b; fill-opacity: .38; stroke: #859477; stroke-opacity: .72; }
-.campaign-map .map-gridlines { stroke: #768672; stroke-opacity: .21; }
-.campaign-map .map-river { stroke: #7d9d97; stroke-opacity: .72; }
-.campaign-map .province { fill: #a8ad7b; fill-opacity: .1; stroke: #8d9167; stroke-opacity: .68; }
-.campaign-map .province:hover, .campaign-map .province.selected { fill: #c9b979; fill-opacity: .4; stroke: #928044; stroke-opacity: .95; }
-.campaign-map .province.enemy { fill: #b87560; fill-opacity: .2; stroke: #a4553f; stroke-opacity: .74; }
-.campaign-map .place { fill: #fffef7; stroke: #596652; }
-.campaign-map .place-label { fill: #354338; }
-.campaign-map .province-label { fill: #596857; }
-.map-tag, .map-legend { background: rgba(255,255,250,.92); border-color: rgba(49,61,51,.18); color: #526052; }
-.map-compass { color: #596a5c; }
-.command-panel { background: #fbfcf8; }
-.commander-name { color: #2d382f; }
-.stat small { color: #748074; }
-.stat strong { color: #344238; }
-.panel-heading { color: #737b50; }
-.order-card { background: #f2f4ee; border-color: rgba(49,61,51,.16); }
-.order-card small { color: #748074; }
-.order-card span { color: #867342; }
-.selected-box { background: #eef1e8; }
-.selected-box p { color: #59665b; }
-.action-button { background: #f0f3ec; border-color: rgba(49,61,51,.2); color: #405044; }
-.action-button:hover:not(:disabled) { background: #e4e9dc; border-color: #9c986d; }
-.resolve-button { background: #a59a68; color: #fffef6; }
-.resolve-button:hover { background: #8f875c; }
-.event-log { color: #657166; }
-.event-log em { color: #877344; }
-.modal-backdrop { background: rgba(37,45,38,.34); }
-.modal { background: #fffefa; border-color: rgba(115,123,80,.38); box-shadow: 0 25px 80px rgba(38,48,40,.2); }
-.modal:before { border-color: rgba(115,123,80,.14); }
-.modal-close { color: #687368; }
-.modal-kicker { color: #827344; }
-.modal-copy, .briefing-grid p { color: #566358; }
-.modal-primary, .modal-secondary { border-color: #8f875c; background: #a59a68; color: #fffef6; }
-.modal-secondary { background: transparent; color: #536154; border-color: rgba(49,61,51,.22); }
-.modal-primary:hover { background: #8f875c; }
-.option-row { color: #344238; border-color: rgba(49,61,51,.16); }
-.option-row small { color: #748074; }
-.toggle { border-color: #a5ad9d; background: #e5e9e1; }
-.toggle:after { background: #798574; }
-.toggle.on { background: #a59a68; border-color: #8f875c; }
-.toggle.on:after { background: #fffef6; }
-.difficulty { background: #f3f5ef; border-color: #aab39f; color: #3b493d; }
-.briefing-aside { color: #687368; }
-.briefing-aside b { color: #827344; }
-.modal-rule { background: linear-gradient(90deg, #a59a68, transparent); }
-.save-info { color: #687368; }
-.toast { box-shadow: 0 6px 25px rgba(38,48,40,.18); }
-.exit-screen p { color: #657166; }
+body { background: #f6f0df; color: var(--paper); }
+.grain { opacity: .055; mix-blend-mode: multiply; }
+.topbar { color: #564762; border-color: rgba(68, 51, 79, .18); }
+.topbar-right { color: #796d80; }
+.top-divider { background: #d3c6ad; }
+.live-dot { background: #718b72; box-shadow: 0 0 11px rgba(113, 139, 114, .55); }
+.brand-mark i { color: var(--gold); }
+.brand-star { color: #b3833d; text-shadow: 0 0 12px rgba(179, 131, 61, .38); }
+.menu-screen, .exit-screen { background: #f6f0df; }
+.menu-visual {
+  background:
+    radial-gradient(ellipse at 63% 40%, rgba(201, 188, 219, .74), transparent 43%),
+    radial-gradient(ellipse at 77% 76%, rgba(167, 197, 184, .55), transparent 38%),
+    radial-gradient(ellipse at 51% 47%, #e8dfcb 0%, #e4e6d9 48%, #f2ecdc 100%);
+}
+.menu-visual:after {
+  content: '';
+  position: absolute;
+  inset: 9% 8%;
+  pointer-events: none;
+  opacity: .22;
+  background: repeating-radial-gradient(ellipse at 62% 44%, transparent 0 42px, rgba(125, 99, 150, .4) 43px 44px, transparent 45px 82px);
+  mask-image: radial-gradient(ellipse, #000 4%, transparent 72%);
+}
+.map-wash { background: linear-gradient(100deg, #f6f0df 0%, rgba(246,240,223,.88) 22%, rgba(246,240,223,.2) 67%, rgba(246,240,223,.48) 100%), linear-gradient(0deg, rgba(246,240,223,.55), transparent 40%, rgba(246,240,223,.22)); }
+.hero-vignette { background: linear-gradient(90deg, #f6f0df 0%, rgba(246,240,223,.95) 3%, rgba(246,240,223,.18) 34%, transparent 68%), linear-gradient(0deg, #f6f0df 0%, transparent 16%, transparent 88%, #f6f0df 100%); }
+.hero-map { filter: drop-shadow(0 0 14px rgba(116, 95, 140, .12)); }
+.land-shape { fill: #b8b69f; stroke: #8d8874; }
+.river { stroke: #7d9eaa; filter: drop-shadow(0 0 4px rgba(92, 151, 174, .45)); }
+.frontline { stroke: #a45555; }
+.frontline-dash { stroke: #f5d894; }
+.map-labels { fill: #686079; opacity: .76; }
+.contours { stroke: #958a9e; opacity: .6; }
+.map-coordinate { color: #6d6277; }
+.eyebrow, .panel-eyebrow { color: #687e74; }
+.menu-brand h1, h1 { color: #30253f; text-shadow: 0 3px 22px rgba(255,255,255,.62); font-family: 'Cinzel', Georgia, serif; }
+.amp { color: #a97932; }
+.subtitle { color: #71647a; letter-spacing: .23em; }
+.title-rule { color: #a97932; }
+.intro { color: #62566d; }
+.menu-index { color: #81748a; }
+.menu-label, .menu-button.primary .menu-label { color: #352a44; }
+.menu-detail { color: #796f7c; }
+.menu-arrow { color: #a97932; }
+.lock-icon { color: #8b8090; }
+.menu-footer { color: #796f7c; }
+.menu-footer b { color: #5a4c68; }
+.menu-button { border-color: rgba(68, 51, 79, .2); }
+.menu-button:hover { background: linear-gradient(90deg, rgba(101,127,121,.13), rgba(169,121,50,.04), transparent); }
+.menu-button.primary:before { background: linear-gradient(180deg, #b88d4b, #8c6935); }
+.menu-side-note { color: #796e80; }
+.dispatch-card { background: rgba(255,252,242,.94); color: #382d45; border-color: #d7c8aa; box-shadow: 0 12px 32px rgba(62,48,70,.14); }
+.dispatch-card:before { border-color: rgba(129,94,49,.24); }
+.dispatch-stamp { color: #9c5952; }
+.dispatch-sign, .dispatch-bottom { color: #756a77; }
+.game-screen { background: #f2ecdc; }
+.game-top { background: #fbf8ee; border-color: rgba(68,51,79,.16); }
+.game-title { color: #352a44; font-family: 'Cinzel', Georgia, serif; }
+.game-title small, .commander-role { color: #796f7c; }
+.turn-display { color: #62566d; }
+.turn-display strong { color: #a97932; }
+.back-button, .small-button { color: #5b5065; border-color: rgba(68,51,79,.2); }
+.back-button:hover, .small-button:hover { color: #30253f; border-color: var(--gold); }
+.map-panel { background: radial-gradient(ellipse at 52% 43%, #e6e2d2, #dce5dc 66%, #ebe4d4); }
+.campaign-map .map-land { fill: #aaa98e; fill-opacity: .38; stroke: #807c6d; stroke-opacity: .72; }
+.campaign-map .map-gridlines { stroke: #827a8e; stroke-opacity: .2; }
+.campaign-map .map-river { stroke: #6f9ca8; stroke-opacity: .78; filter: drop-shadow(0 0 3px rgba(77,146,164,.35)); }
+.campaign-map .province { fill: #a89c70; fill-opacity: .1; stroke: #888064; stroke-opacity: .72; }
+.campaign-map .province:hover, .campaign-map .province.selected { fill: #d7bd77; fill-opacity: .42; stroke: #a97932; stroke-opacity: .98; filter: drop-shadow(0 0 5px rgba(185,142,66,.3)); }
+.campaign-map .province.enemy { fill: #ad6863; fill-opacity: .2; stroke: #a45555; stroke-opacity: .78; }
+.campaign-map .place { fill: #fffaf0; stroke: #54465e; }
+.campaign-map .place-label { fill: #3c3048; }
+.campaign-map .province-label { fill: #625b68; }
+.map-tag, .map-legend { background: rgba(255,252,242,.94); border-color: rgba(68,51,79,.2); color: #5b5065; }
+.map-compass { color: #665871; }
+.command-panel { background: #fbf8ee; }
+.commander-name { color: #352a44; }
+.stat small { color: #796f7c; }
+.stat strong { color: #40344c; }
+.panel-heading { color: #687e74; }
+.order-card { background: #f3efe3; border-color: rgba(68,51,79,.16); }
+.order-card small { color: #796f7c; }
+.order-card span { color: #987139; }
+.selected-box { background: #f0ecdf; }
+.selected-box p { color: #62566d; }
+.action-button { background: #f4f0e5; border-color: rgba(68,51,79,.2); color: #51465c; }
+.action-button:hover:not(:disabled) { background: #e9e4d6; border-color: #a99a78; }
+.resolve-button { background: #74887a; color: #fffaf0; }
+.resolve-button:hover { background: #5f7467; }
+.event-log { color: #6f6475; }
+.event-log em { color: #987139; }
+.modal-backdrop { background: rgba(48,37,63,.32); }
+.modal { background: #fffdf7; border-color: rgba(169,121,50,.42); box-shadow: 0 25px 80px rgba(48,37,63,.22); }
+.modal:before { border-color: rgba(169,121,50,.19); }
+.modal-close { color: #71677a; }
+.modal-kicker { color: #8d6a35; }
+.modal h2 { color: #352a44; font-family: 'Cinzel', Georgia, serif; }
+.modal-copy, .briefing-grid p { color: #5d5267; }
+.modal-primary, .modal-secondary { border-color: #8e754e; background: #8e754e; color: #fffdf7; }
+.modal-secondary { background: transparent; color: #5b5065; border-color: rgba(68,51,79,.23); }
+.modal-primary:hover { background: #75603f; }
+.option-row { color: #40344c; border-color: rgba(68,51,79,.16); }
+.option-row small { color: #796f7c; }
+.toggle { border-color: #aaa398; background: #ebe7dc; }
+.toggle:after { background: #817786; }
+.toggle.on { background: #74887a; border-color: #5f7467; }
+.toggle.on:after { background: #fffdf7; }
+.difficulty { background: #f3efe3; border-color: #b8ad98; color: #44384f; }
+.briefing-aside { color: #71677a; }
+.briefing-aside b { color: #8d6a35; }
+.modal-rule { background: linear-gradient(90deg, #ad8548, transparent); }
+.save-info { color: #71677a; }
+.toast { box-shadow: 0 6px 25px rgba(48,37,63,.18); }
+.exit-screen p { color: #62566d; }
+
+@media (max-width: 680px) {
+  .hero-vignette { background: linear-gradient(90deg, rgba(246,240,223,.88), rgba(246,240,223,.35)), linear-gradient(0deg,#f6f0df,transparent 45%,#f6f0df); }
+}
