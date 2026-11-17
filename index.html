@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101513">
+  <title>IRON &amp; ASH — An Officer's Chronicle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main id="app" class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark"><span class="brand-star">✳</span><span>FIELD OFFICE <i>/</i> 1916</span></div>
+      <div class="topbar-right"><span class="live-dot"></span><span>WESTERN THEATRE</span><span class="top-divider"></span><span id="top-date">AUTUMN 1916</span></div>
+    </header>
+    <section id="menu-screen" class="menu-screen screen active">
+      <div class="menu-visual" aria-hidden="true">
+        <div class="map-wash"></div><div class="map-grid"></div>
+        <svg class="hero-map" viewBox="0 0 1100 820" preserveAspectRatio="xMidYMid slice" role="presentation">
+          <path class="land-shape" d="M-30 140 86 82l119 30 88-56 106 54 74-8 81 70 123-29 86 54 135-39 49 67 126-8 67 99-59 92 42 100-89 84 19 89-92 35-48 103-127-8-64 61-110-43-80 42-119-54-87 30-92-64-83 20-91-69-62-4-34-91-70-53 37-102-58-73 28-86-44-78z"/>
+          <path class="river" d="M-40 566c115-15 119-144 231-142s100 127 203 79 92-123 209-98 97 147 214 126 116-125 228-80 73 88 122 90"/>
+          <path class="frontline" d="M128 249c120 35 155 2 221 74s113 34 159 84 73 38 135 9 121 18 179-10 115 31 204-16"/>
+          <path class="frontline-dash" d="M128 249c120 35 155 2 221 74s113 34 159 84 73 38 135 9 121 18 179-10 115 31 204-16"/>
+          <g class="towns"><circle cx="180" cy="384" r="6"/><circle cx="295" cy="259" r="5"/><circle cx="416" cy="474" r="6"/><circle cx="522" cy="327" r="5"/><circle cx="675" cy="440" r="7"/><circle cx="788" cy="277" r="5"/><circle cx="907" cy="497" r="6"/><circle cx="349" cy="604" r="5"/></g>
+          <g class="map-labels"><text x="115" y="415">VERDUN</text><text x="255" y="238">ARGONNE</text><text x="375" y="510">ST. MIHIEL</text><text x="478" y="304">MONTFAUCON</text><text x="637" y="472">VARENNES</text><text x="760" y="253">MEUSE</text><text x="872" y="529">METZ ROAD</text><text x="300" y="649">SOMME SECTOR</text></g>
+          <g class="contours"><path d="M137 166q146-97 279-8t263-3 257 30"/><path d="M98 197q158-100 302-15t283-9 286 32"/><path d="M174 673q133-90 259-22t249-5 245 22"/><path d="M148 704q151-90 288-23t266-8 269 25"/></g>
+        </svg>
+        <div class="map-coordinate coord-a">49°10′ N <span>—</span> 05°23′ E</div><div class="map-coordinate coord-b">SHEET 08 / MEUSE-ARGONNE</div>
+        <div class="hero-vignette"></div>
+      </div>
+      <div class="menu-content">
+        <div class="menu-brand"><div class="eyebrow"><span class="eyebrow-line"></span> A GRAND STRATEGY CHRONICLE</div>
+          <h1>IRON<br><span class="amp">&amp;</span> ASH</h1>
+          <p class="subtitle">THE OFFICER'S CHRONICLE</p>
+          <div class="title-rule"><span></span><i>✳</i><span></span></div>
+          <p class="intro">History is written by those who<br>hold the line.</p>
+        </div>
+        <nav class="main-menu" aria-label="Main menu">
+          <button class="menu-button primary" data-action="new"><span class="menu-index">01</span><span class="menu-label">New campaign</span><span class="menu-detail">BEGIN YOUR SERVICE</span><span class="menu-arrow">↗</span></button>
+          <button class="menu-button" data-action="load"><span class="menu-index">02</span><span class="menu-label">Load campaign</span><span class="menu-detail" id="save-status">NO FIELD RECORD FOUND</span><span class="menu-arrow">↗</span></button>
+          <button class="menu-button" data-action="options"><span class="menu-index">03</span><span class="menu-label">Options</span><span class="menu-detail">SET YOUR PREFERENCES</span><span class="menu-arrow">↗</span></button>
+          <button class="menu-button locked" data-action="character"><span class="menu-index">04</span><span class="menu-label">Create character</span><span class="menu-detail">UNAVAILABLE IN THIS EDITION</span><span class="lock-icon">▣</span></button>
+          <button class="menu-button" data-action="bio"><span class="menu-index">05</span><span class="menu-label">Biography</span><span class="menu-detail">THE STORY SO FAR</span><span class="menu-arrow">↗</span></button>
+          <button class="menu-button exit-button" data-action="exit"><span class="menu-index">06</span><span class="menu-label">Exit</span><span class="menu-detail">END YOUR SERVICE</span><span class="menu-arrow">↗</span></button>
+        </nav>
+        <div class="menu-footer"><span><b>V. 1.0</b> &nbsp;·&nbsp; A GAME OF COMMAND</span><span>DESIGNED FOR THE HISTORICAL RECORD</span></div>
+      </div>
+      <aside class="dispatch-card"><div class="dispatch-top"><span>FIELD DISPATCH</span><span class="dispatch-stamp">URGENT</span></div><p>“The map is not the ground.<br>The order is not the battle.”</p><div class="dispatch-sign">— FIELD MANUAL, VOL. II</div><div class="dispatch-bottom"><span>HQ / SECTOR 4</span><span>NO. 19—16</span></div></aside>
+      <div class="menu-side-note">THE WESTERN FRONT <span>·</span> 1916</div>
+    </section>
+    <section id="game-screen" class="game-screen screen" aria-label="Campaign map"></section>
+    <div id="modal-root"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
