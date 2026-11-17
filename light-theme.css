@@ -22,61 +22,31 @@ body { background: #f6f0df; color: var(--paper); }
 .menu-screen, .exit-screen { background: #f6f0df; }
 .menu-visual {
   top: 0;
-  background: transparent;
+  background: #171226;
 }
-
 .menu-background {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
-  opacity: .92;
-  filter: saturate(1.05) brightness(.96) contrast(1.02);
+  object-position: 54% 18%;
+  opacity: 1;
+  filter: saturate(1.04) contrast(1.03);
 }
-
+/* Cream blend on the seam, a gentle bottom fade, and a warm vignette. */
 .menu-visual .map-wash {
   z-index: 1;
-  background: linear-gradient(90deg, rgba(246,240,223,.96) 0%, rgba(246,240,223,.82) 36%, rgba(246,240,223,.2) 74%, rgba(246,240,223,.48) 100%), linear-gradient(0deg, rgba(246,240,223,.68), transparent 42%, rgba(246,240,223,.28));
+  background:
+    linear-gradient(90deg, #f6f0df 0%, rgba(246,240,223,.97) 7%, rgba(246,240,223,.66) 20%, rgba(246,240,223,.1) 38%, transparent 52%),
+    linear-gradient(0deg, rgba(246,240,223,.72) 0%, rgba(246,240,223,.12) 16%, transparent 34%),
+    radial-gradient(ellipse at 74% 30%, transparent 32%, rgba(26,18,42,.3) 100%);
 }
-
-.menu-visual .map-grid {
-  z-index: 1;
-}
-
+.menu-visual .map-grid { display: none; }
 .menu-visual .hero-map,
+.menu-visual .hero-vignette,
 .menu-visual .map-coordinate,
-.menu-visual .hero-vignette {
-  z-index: 1;
-}
-
-.menu-visual:after {
-  z-index: 1;
-}
-
-.menu-visual {
-  background: transparent;
-}
-.menu-visual:after {
-  content: '';
-  position: absolute;
-  inset: 9% 8%;
-  pointer-events: none;
-  opacity: .22;
-  background: repeating-radial-gradient(ellipse at 62% 44%, transparent 0 42px, rgba(125, 99, 150, .4) 43px 44px, transparent 45px 82px);
-  mask-image: radial-gradient(ellipse, #000 4%, transparent 72%);
-}
-.map-wash { background: linear-gradient(100deg, #f6f0df 0%, rgba(246,240,223,.88) 22%, rgba(246,240,223,.2) 67%, rgba(246,240,223,.48) 100%), linear-gradient(0deg, rgba(246,240,223,.55), transparent 40%, rgba(246,240,223,.22)); }
-.hero-vignette { background: linear-gradient(90deg, #f6f0df 0%, rgba(246,240,223,.95) 3%, rgba(246,240,223,.18) 34%, transparent 68%), linear-gradient(0deg, #f6f0df 0%, transparent 16%, transparent 88%, #f6f0df 100%); }
-.hero-map { filter: drop-shadow(0 0 14px rgba(116, 95, 140, .12)); }
-.land-shape { fill: #b8b69f; stroke: #8d8874; }
-.river { stroke: #7d9eaa; filter: drop-shadow(0 0 4px rgba(92, 151, 174, .45)); }
-.frontline { stroke: #a45555; }
-.frontline-dash { stroke: #f5d894; }
-.map-labels { fill: #686079; opacity: .76; }
-.contours { stroke: #958a9e; opacity: .6; }
-.map-coordinate { color: #6d6277; }
+.menu-visual:after { display: none; }
 .eyebrow, .panel-eyebrow { color: #687e74; }
 .menu-brand h1, h1 { color: #30253f; text-shadow: 0 3px 22px rgba(255,255,255,.62); font-family: 'Cinzel', Georgia, serif; }
 .amp { color: #a97932; }
@@ -159,5 +129,11 @@ body { background: #f6f0df; color: var(--paper); }
 .exit-screen p { color: #62566d; }
 
 @media (max-width: 680px) {
-  .hero-vignette { background: linear-gradient(90deg, rgba(246,240,223,.88), rgba(246,240,223,.35)), linear-gradient(0deg,#f6f0df,transparent 45%,#f6f0df); }
+  .menu-visual { opacity: 1; }
+  .menu-background { object-position: 58% 14%; }
+  .menu-visual .map-wash {
+    background:
+      linear-gradient(0deg, rgba(246,240,223,.97) 0%, rgba(246,240,223,.93) 46%, rgba(246,240,223,.74) 78%, rgba(246,240,223,.5) 100%);
+  }
 }
+
